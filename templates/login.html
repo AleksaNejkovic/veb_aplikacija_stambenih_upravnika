@@ -1,0 +1,64 @@
+{% extends 'base_login.html' %}
+
+{% block title %}Prijavljivanje korisnika{% endblock %}
+
+{% block content%}
+
+<center>
+<div class="naslov">
+  <hr class="linijaiznad">
+  <p>moja stambena ustanova</p>
+</div>
+
+</center>
+<img class="talas" src="static/img/wave.svg">
+<div class="container">
+	<div class="img">
+		<img src="static/img/building.svg">
+	</div>
+	<div class="login-content">
+		<form action="{{url_for('Login')}}" method="POST">
+      <div class=" mt-2 mb-2">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <center>{{message}}</center>
+                </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+			<img src="static/img/avatar.svg">
+			<h2 class="title">PRIJAVI SE</h2>
+           	<div class="input-div one">
+           		<div class="i">
+           		  <i class="fas fa-user"></i>
+           		</div>
+           		   <div class="div">
+           		   		<h5>Korisničko ime</h5>
+           		   		<input type="text" class="input" name="korisnicko_ime">
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Lozinka</h5>
+           		    	<input type="password" class="input" name="korisnicka_lozinka">
+            	   </div>
+            	</div>
+            	<a href="#">Zaboravljena šifra?</a>
+            	<input type="submit" class="btn" value="Potvrdi">
+      </form>
+    </div>
+  </div>
+  
+
+  
+  
+{% endblock %}

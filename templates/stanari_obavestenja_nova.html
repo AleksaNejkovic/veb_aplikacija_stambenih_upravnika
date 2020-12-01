@@ -1,0 +1,145 @@
+{% extends 'base_stanari.html' %}
+
+{% block title %}Stanar zgrade{% endblock %}
+
+{% block content%}
+
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="static/img/stanari_logo.svg">STANARI</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('StanariPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('StanariRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('StanariObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link" href="{{url_for('OdjaviStanara')}}">Odjavi me</a>
+            </li>
+          </ul>
+    </div>
+  </nav>
+
+  <div class="container stranacela">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column svgslika ui-sortable">
+          <img src="/static/img/sms.svg">
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+      <div class=" mt-2 mb-2">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <center>{{message}}</center>
+                </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+      <div class="row mb-4 mt-5 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column ui-sortable">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 175px;">Izaberite opciju:</label>
+            </div>
+            <select class="custom-select message" id="inputGroupSelect01">
+              <option disabled value="0" style="display: none;">Izaberite opciju</option>
+              <option value="1" selected>Kreiraj novo obaveštenje</option>
+              <option value="2">Pregled primljenih obaveštenja</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+       <form method="POST">
+        <div class="row mb-5">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="form-group">
+            <label for="exampleFormControlSelect2">Izaberite primaoca poruke:</label>
+              <select class="form-control" name='primalac' id="exampleFormControlSelect2">
+                {%for korisnici in korisnici%}
+                <option value="{{korisnici.id}}">{{korisnici.ime}}&nbsp;{{korisnici.prezime}}</option>
+                {%endfor%}
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+        
+        
+        <div class="row mb-5">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Unesite sadržaj poruke:</label>
+              <textarea class="form-control" name="sadrzaj" id="exampleFormControlTextarea1" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column pozicijadugmetapotvrde ui-sortable">
+            <button type="submit" formaction="{{url_for('StanariObavestenjaNova')}}" class="btn dugmepotvrdi btn-light">Pošalji poruku&nbsp;&nbsp;<i class="fas fa-check"></i></button>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+      </form>
+  </div>
+
+<script>
+   $(document).ready(function() {
+        $("select.message").change(function(){
+        var message1 = $(this).children("option:selected").val();
+        if(message1==1){
+          window.location.href="http://localhost:5000/stanari_obavestenja_nova"
+        }
+        else if(message1==2){
+          window.location.href="http://localhost:5000/stanari_obavestenja_inbox"
+        }
+      });
+    });
+
+  </script>
+    
+
+  
+{% endblock %}

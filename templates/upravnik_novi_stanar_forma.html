@@ -1,0 +1,133 @@
+{% extends 'base_upravnik.html' %}
+
+{% block title %}Novi stanar{% endblock %}
+
+{% block content%}
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="static/img/upravnik_logo.svg">UPRAVNIK</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikStanari',broj_stana='-')}}">Stanari</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link" href="{{url_for('OdjaviUpravnika')}}">Odjavi me</a>
+            </li>
+
+          </ul>
+      </div>
+  </nav>
+  <div class="container justify-content-center stranacela">
+    <form method="POST">
+      <div class="row justify-content-center mt-5 mb-5">
+        <h2>Unesite novog stanara zgrade</h2>
+      </div>
+      <div class="row mt-2 mb-2 justify-content-center">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <center>{{message}}</center>
+                </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+      <div class="row mb-2 justify-content-center admin_forma">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width: 175px;">Ime:</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="ime" required>
+        </div>
+      </div>
+      <div class="row mb-2 justify-content-center admin_forma">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width: 175px;">Prezime:</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="prezime" required>
+        </div>
+      </div>
+      <div class="row mb-2 justify-content-center admin_forma">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width: 175px;">Broj stana:</span>
+          </div>
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="broj_stana" required>
+        </div>
+      </div>
+      <div class="row mb-2 justify-content-center admin_forma">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width: 175px;">Broj telefona:</span>
+          </div>
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="broj_telefona" required>
+        </div>
+      </div>
+      <div class="row mb-2 justify-content-center admin_forma">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width: 175px;">Korisničko ime:</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="korisnicko_ime" required>
+        </div>
+      </div>
+      <div class="row mb-2 justify-content-center admin_forma">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width: 175px;">Korisnička lozinka:</span>
+          </div>
+          <input type="password" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="korisnicka_lozinka" required>
+        </div>
+      </div>
+      <div class="row mb-2 justify-content-center admin_forma">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default" style="width: 175px;">Uloga:</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="text-align: center;" placeholder="STANAR" readonly>
+        </div>
+      </div>
+      <div class="row mb-2 justify-content-center admin_forma">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-light dugmiciforme" formaction="{{url_for('UpravnikNoviStanar')}}">Potvrdi</button>
+            </div>
+            <div class="col-md-3">
+              <button type="reset" class="btn btn-light dugmiciforme">Odbaci</button>
+            </div>
+            <div class="col-md-3">
+            </div>
+      </div>
+      
+    </div>
+  </form>
+    
+  <script type="text/javascript">
+     
+  </script>
+
+
+  
+{% endblock %}

@@ -1,0 +1,219 @@
+{% extends 'base_upravnik.html' %}
+
+{% block title %}Upravnik zgrade{% endblock %}
+
+{% block content%}
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="/static/img/upravnik_logo.svg">UPRAVNIK</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link" href="{{url_for('UpravnikPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('UpravnikRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikStanari',broj_stana='-')}}">Stanari</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link" href="{{url_for('OdjaviUpravnika')}}">Odjavi me</a>
+            </li>
+          </ul>
+      </div>
+  </nav>
+
+  <div class="container stranacela">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column svgslika ui-sortable">
+          <img src="/static/img/group.svg">
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column ui-sortable">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 175px;">Izaberite račun:</label>
+            </div>
+            <select class="custom-select racun" id="inputGroupSelect01">
+              <option value="1">Račun za struju</option>
+              <option value="2">Račun za vodu</option>
+              <option value="3">Račun za čišćenje</option>
+              <option value="4" selected>Račun stambenog fonda</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <form method="POST">
+        <div class="row mb-4">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 175px;">Broj računa:</span>
+              </div>
+              <input type="number" name="broj_racuna" class="form-control" style="text-align: left;"  required>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-2 column ui-sortable">
+              
+            </div>
+            <div class="col-md-8 column ui-sortable">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" style="width: 175px;">Za mesec:</span>
+                </div>
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01"  required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-2 column ui-sortable">
+              
+            </div>
+          </div>
+        <div class="row mb-5">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 175px;">Unesite iznos:</span>
+              </div>
+              <input type="number" name="iznos_rsd" class="form-control" style="text-align: left;"  required>
+              <div class="input-group-append">
+                <span class="input-group-text"style="display:inline-block; margin:0 auto;width: 70px">RSD</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column pozicijadugmetapotvrde ui-sortable">
+            <button type="submit" formaction="{{url_for('UpravnikRacuniFond')}}" class="btn dugmepotvrdi btn-light">Potvrdi i kreiraj račun&nbsp;&nbsp;<i class="fas fa-check"></i></button>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+      </form>
+      <hr width="90%">
+      <div class="row mb-5">
+        <div class="col-md-1 column ui-sortable">
+          
+        </div>
+        <div class="col-md-10 column pozicijadugmetapotvrde ui-sortable">
+          <center><h3 class="mt-4 mb-3">Uneti računi za stambeni fond</h3></center>
+          <table class="table table-dark table-responsive-sm">
+            <thead style="background-color: #17335e!important;color: white;">
+            <tr>
+                <th scope="col">Broj računa</th>
+                <th scope="col">Mesec važenja</th>
+                <th scope="col">Ukupan iznos RSD</th>
+                <th scope="col" style="text-align: center;">Akcija</th>
+            </tr>
+            </thead>
+            {% for racuni_fond in racuni_fond %}
+            <tbody style="background-color: whitesmoke !important;color: #17335e;">
+            <tr>
+                <td>{{racuni_fond.broj_racuna}}</td>
+                <td>{{racuni_fond.mesec_vazenja}}</td>
+                <td>{{racuni_fond.iznos}}</td>
+                <td style="text-align: center;"><a href="{{url_for('UpravnikRacuniFondIzmena',broj_racuna=racuni_fond.broj_racuna)}}" ><i class="fas fa-edit action"></i></a>&nbsp;&nbsp;&nbsp;<a href="{{url_for('UpravnikRacuniFondBrisanje',broj_racuna=racuni_fond.broj_racuna)}}" ><i class="fas fa-trash-alt action"></i></a></td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        </div>
+        <div class="col-md-1 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+      <div class="row mb-5 mt-5">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column btnprfond ui-sortable">
+          <a href="{{url_for('UpravnikPlaceniRacuniFond')}}"><button type="submit" class="btn dugmeStruja btn-light">Pregled plaćenih računa za fond&nbsp;&nbsp;<i class="fas fa-clipboard-list"></i></button></a>
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+  </div>
+  <script>
+   $(document).ready(function() {
+        $("select.racun").change(function(){
+        var racun1 = $(this).children("option:selected").val();
+        // alert("You have selected the country - " + racun1);
+        if(racun1==1){
+          window.location.href="http://localhost:5000/upravnik_racuni_struja"
+        }
+        else if(racun1==2){
+          window.location.href="http://localhost:5000/upravnik_racuni_voda"
+        }
+        else if(racun1==3){
+          window.location.href="http://localhost:5000/upravnik_racuni_cistac"
+        }
+        else if(racun1==4){
+          window.location.href="http://localhost:5000/upravnik_racuni_fond"
+        }
+
+    });
+       
+    });
+
+   
+  </script>
+    
+
+  
+{% endblock %}

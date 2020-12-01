@@ -1,0 +1,110 @@
+{% extends 'base_stanari.html' %}
+
+{% block title %}Stanari zgrade{% endblock %}
+
+{% block content%}
+
+
+
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="static/img/stanari_logo.svg">STANARI</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('StanariPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('StanariRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('StanariObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link menesamo" href="{{url_for('OdjaviStanara')}}">Odjavi me</a>
+            </li>
+          </ul>
+    </div>
+  </nav>
+  <center><h3 style="margin-top: 5%">Podaci stambenog objekta</h3></center>
+  <div class="container justify-content-center stranacela">
+    <div class="row justify-content-center dijagrami my5">
+      <div class="col-lg-5 my-5 a"><canvas id="myChart"></canvas></div>
+      <div class="col-lg-2"></div>
+      <div class="col-lg-5 my-5 a"><canvas id="myChart1"></canvas></div>
+      <div class="col-lg-5 my-5 a"><canvas id="myChart2"></canvas></div>
+      <div class="col-lg-2"></div>
+      <div class="col-lg-5 my-5 a"><canvas id="myChart3"></canvas></div>
+    </div>
+    <div class="row my-5">
+      <hr style="width:90%;">
+    </div>
+    <div class="row mb-5 justify-content-center">
+      <a href="{{url_for('StanariPodaci')}}"><button type="button" class="btn dugmestambenipodaci btn-light">Lični podaci&nbsp;&nbsp;<i class="fas fa-list"></i></button></a>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+      let myChart=document.getElementById('myChart').getContext('2d');
+      let BarChart=new Chart(myChart,{
+        type:'bar',
+        data: {
+
+          labels:['Trenutni broj stanara u zgradi'],
+          datasets:[{
+            label:"Broj stanara u zgradi za mesec Novembar 2020",
+            data:['{{broj_stanara}}'],
+            backgroundColor:['purple'],
+            borderColor:['darkblue']
+
+
+          }]
+        },
+        options: {},
+      });
+     
+      var t_s_s='{{broj_slobodnih_stanova}}';
+      let myChart1=document.getElementById('myChart1').getContext('2d');
+      let BarChart1=new Chart(myChart1,{
+        type:'bar',
+        data: {
+          labels:['Trenutni iznos stambenog fonda za mesec novembar 2020.'],
+          datasets:[{
+            label:"Trenutni broj slobodnih stanova u zgradi",
+            data:[t_s_s],
+            backgroundColor:['yellow'],
+          }]
+        },
+        options: {},
+      });
+      let myChart2=document.getElementById('myChart2').getContext('2d');
+      let BarChart2=new Chart(myChart2,{
+        type:'bar',
+        data: {
+          labels:['Trenutni iznos stambenog fonda za mesec novembar 2020.'],
+          datasets:[{
+            label:"Trenutni iznos stambenog fonda za mesec novembar 2020.",
+            data:['{{trenutni_fond}}'],
+            backgroundColor:['orange'],
+          }]
+        },
+        options: {},
+      });
+      let myChart3=document.getElementById('myChart3').getContext('2d');
+      let BarChart3=new Chart(myChart3,{
+        type:'bar',
+        data: {
+          labels:['Ukupan broj stanova u zgradi.'],
+          datasets:[{
+            label:"Ukupan broj stanova u zgradi.",
+            data:[24],
+            backgroundColor:['green']
+          }]
+        },
+        options: {},
+      });
+  </script>
+{% endblock %}

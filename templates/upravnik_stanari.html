@@ -1,0 +1,196 @@
+{% extends 'base_upravnik.html' %}
+
+{% block title %}Upravnik zgrade{% endblock %}
+
+{% block content%}
+
+    {% if stanari is defined %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="navbar-brand logo"><img src="/static/img/upravnik_logo.svg">UPRAVNIK</div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item ">
+                  <a class="nav-link" href="{{url_for('UpravnikPocetna')}}">Početna</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('UpravnikRacuni')}}">Računi</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{url_for('UpravnikStanari',broj_stana='-')}}">Stanari</a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('UpravnikObavestenja')}}">Obaveštenja</a>
+                </li>
+                <li class="nav-item odjava">
+                  <a class="nav-link" href="{{url_for('OdjaviUpravnika')}}">Odjavi me</a>
+                </li>
+
+              </ul>
+          </div>
+        </nav>
+      
+        <div class="container stanovistanara stranacela">
+            <div class="row justify-content-center my-2">
+                <h3>Izaberite stan</h3>
+            </div>
+        <div class="grid-container my-1">
+            <a href="{{url_for('UpravnikStanari',broj_stana=1)}}" ><div class="grid-item" id="d1"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 01</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=2)}}" ><div class="grid-item" id="d2"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 02</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=3)}}" ><div class="grid-item" id="d3"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 03</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=4)}}" ><div class="grid-item" id="d4"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 04</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=5)}}" ><div class="grid-item" id="d5"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 05</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=6)}}" ><div class="grid-item" id="d6"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 06</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=7)}}" ><div class="grid-item" id="d7"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 07</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=8)}}" ><div class="grid-item" id="d8"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 08</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=9)}}" ><div class="grid-item" id="d9"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 09</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=10)}}" ><div class="grid-item" id="d10"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 10</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=11)}}" ><div class="grid-item" id="d11"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 11</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=12)}}" ><div class="grid-item" id="d12"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 12</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=13)}}" ><div class="grid-item" id="d13"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 13</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=14)}}" ><div class="grid-item" id="d14"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 14</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=15)}}" ><div class="grid-item" id="d15"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 15</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=16)}}" ><div class="grid-item" id="d16"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 16</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=17)}}" ><div class="grid-item" id="d17"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 17</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=18)}}" ><div class="grid-item" id="d18"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 18</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=19)}}" ><div class="grid-item" id="d19"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 19</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=20)}}" ><div class="grid-item" id="d20"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 20</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=21)}}" ><div class="grid-item" id="d21"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 21</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=22)}}" ><div class="grid-item" id="d22"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 22</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=23)}}" ><div class="grid-item" id="d23"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 23</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=24)}}" ><div class="grid-item" id="d24"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 24</div></a>
+        </div>
+        <hr width="90%">
+        <div class="row mb-4 mt-4 justify-content-center">
+            <a href="{{url_for('UpravnikNoviStanar')}}" ><button type="button" class="btn btn-info"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Dodaj stanara</button></a>
+        </div>
+        <hr width="90%">
+        <div class="row justify-content-center my-4">
+          <center><h3>Podaci o stanarima</h3></center>
+            <table class="table table-white table-responsive-sm">
+                <thead style="background-color: #17335e!important;color: white;">
+                <tr>
+                    <th scope="col">Ime</th>
+                    <th scope="col">Prezime</th>
+                    <th scope="col">Broj telefona</th>
+                    <th scope="col">Korisničko ime</th>
+                    <th scope="col">Broj stana</th>
+                    <th scope="col" style="text-align: center;">Akcija</th>
+                </tr>
+                </thead>
+                {% for stanari in stanari %}
+                <tbody style="background-color: whitesmoke !important;color: #17335e;">
+                
+                <tr>
+                    
+                    <td>{{stanari.ime}}</td>
+                    <td>{{stanari.prezime}}</td>
+                    <td>{{stanari.broj_telefona}}</td>
+                    <td>{{stanari.korisnicko_ime}}</td>
+                    <td>{{stanari.broj_stana}}</td>
+                    <td style="text-align: center;"><a href="{{url_for('UpravnikStanarIzmena', id_stanara=stanari.id)}}" ><i class="fas fa-edit action"></i></a>&nbsp;&nbsp;&nbsp;<a href="{{url_for('UpravnikStanarBrisanje', id_stanara=stanari.id)}}" ><i class="fas fa-trash-alt action"></i></a></td>
+                    
+                </tr>
+                
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+        <script type="text/javascript">
+            var br_stana='{{broj}}';
+            var element=String('d'+ br_stana);
+            document.getElementById(element).setAttribute("style", "color: green; border:3px solid green;");
+        </script>
+        </div>
+
+    {% else %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="navbar-brand logo"><img src="/static/img/upravnik_logo.svg">UPRAVNIK</div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item ">
+                  <a class="nav-link" href="{{url_for('UpravnikPocetna')}}">Početna</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('UpravnikRacuni')}}">Računi</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{url_for('UpravnikStanari',broj_stana='-')}}">Stanari</a>
+                </li>
+                 <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('UpravnikObavestenja')}}">Obaveštenja</a>
+                </li>
+                <li class="nav-item odjava">
+                  <a class="nav-link" href="{{url_for('OdjaviUpravnika')}}">Odjavi me</a>
+                </li>
+
+              </ul>
+          </div>
+        </nav>
+        
+        <div class="container stanovistanara stranacela">
+            <div class="row justify-content-center my-2">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          <center>{{message}}</center>
+                        </div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+            <div class="row justify-content-center my-2">
+                <h3>Izaberite stan</h3>
+            </div>
+
+         <div class="grid-container my-1">
+            <a href="{{url_for('UpravnikStanari',broj_stana=1)}}" ><div class="grid-item" id="d1"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 01</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=2)}}" ><div class="grid-item" id="d2"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 02</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=3)}}" ><div class="grid-item" id="d3"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 03</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=4)}}" ><div class="grid-item" id="d4"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 04</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=5)}}" ><div class="grid-item" id="d5"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 05</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=6)}}" ><div class="grid-item" id="d6"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 06</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=7)}}" ><div class="grid-item" id="d7"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 07</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=8)}}" ><div class="grid-item" id="d8"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 08</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=9)}}" ><div class="grid-item" id="d9"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 09</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=10)}}" ><div class="grid-item" id="d10"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 10</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=11)}}" ><div class="grid-item" id="d11"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 11</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=12)}}" ><div class="grid-item" id="d12"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 12</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=13)}}" ><div class="grid-item" id="d13"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 13</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=14)}}" ><div class="grid-item" id="d14"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 14</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=15)}}" ><div class="grid-item" id="d15"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 15</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=16)}}" ><div class="grid-item" id="d16"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 16</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=17)}}" ><div class="grid-item" id="d17"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 17</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=18)}}" ><div class="grid-item" id="d18"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 18</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=19)}}" ><div class="grid-item" id="d19"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 19</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=20)}}" ><div class="grid-item" id="d20"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 20</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=21)}}" ><div class="grid-item" id="d21"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 21</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=22)}}" ><div class="grid-item" id="d22"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 22</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=23)}}" ><div class="grid-item" id="d23"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 23</div></a>
+            <a href="{{url_for('UpravnikStanari',broj_stana=24)}}" ><div class="grid-item" id="d24"><i class="fas fa-door-open"></i>&nbsp;&nbsp;stan 24</div></a>
+        </div>
+        <hr width="90%">
+        <div class="row mb-4 mt-4 justify-content-center">
+            <a href="{{url_for('UpravnikNoviStanar')}}" ><button type="button" class="btn btn-info"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Dodaj stanara</button></a>
+        </div>
+        <hr width="90%">
+        </div>
+        <script type="text/javascript">
+            var br_stana='{{broj}}';
+            var element=String('d'+ br_stana);
+            document.getElementById(element).setAttribute("style", "color: green; border:3px solid green;");
+        </script>
+    {% endif %}
+
+{% endblock %}

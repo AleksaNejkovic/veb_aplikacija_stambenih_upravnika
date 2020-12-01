@@ -1,0 +1,147 @@
+{% extends 'base_stanari.html' %}
+
+{% block title %}Stanari zgrade{% endblock %}
+
+{% block content%}
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="/static/img/stanari_logo.svg">STANARI</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link" href="{{url_for('StanariPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('StanariRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('StanariObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link menesamo" href="{{url_for('OdjaviStanara')}}">Odjavi me</a>
+            </li>
+          </ul>
+    </div>
+  </nav>
+
+  <div class="container stranacela">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column svgslika ui-sortable">
+          <img src="/static/img/power.svg">
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column ui-sortable">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 175px;">Izaberite račun:</label>
+            </div>
+            <select class="custom-select racun" id="inputGroupSelect01">
+              <option value="1" selected>Račun za struju</option>
+              <option value="2">Račun za vodu</option>
+              <option value="3">Račun za čišćenje</option>
+              <option value="4">Račun stambenog fonda</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      
+      <hr width="90%">
+      <div class="row mb-2">
+        <div class="col-md-1 column ui-sortable">
+          
+        </div>
+        <div class="col-md-10 column pozicijadugmetapotvrde ui-sortable">
+          <center><h3 class="mt-4 mb-3">Vaši računi za struju</h3></center>
+          <table class="table table-dark table-responsive-sm">
+            <thead style="background-color: #17335e!important;color: white;">
+            <tr>
+                <th scope="col">Broj računa</th>
+                <th scope="col">Mesec važenja</th>
+                <th scope="col">Ukupan iznos RSD</th>
+                <th scope="col">Ukupno potrošenih kWH</th>
+                <th scope="col" style="text-align: center;">Plati račun</th>
+            </tr>
+            </thead>
+            {% for racuni_za_struju in racuni_za_struju %}
+            <tbody style="background-color: whitesmoke !important;color: #17335e;">
+            <tr >
+                <td style="vertical-align: middle;">{{racuni_za_struju.broj_racuna}}</td>
+                <td style="vertical-align: middle;">{{racuni_za_struju.mesec_vazenja}}</td>
+                <td style="vertical-align: middle;">{{racuni_za_struju.iznos}}</td>
+                <td style="vertical-align: middle;">{{racuni_za_struju.utroseno_kwh}}</td>
+                <td style="text-align: center;vertical-align: middle;"> 
+                  
+                <a href="{{url_for('StanariRacuniStrujaPlati',id_racuna=racuni_za_struju.id)}}"><span style="border-radius:5px;border: 1px ;background-color: gold;padding: 5px;width: 100%;height: 20px;"><i class="fab fa-paypal" style="font-size: 20px"></i><span style="color: #00457C"> Pay</span><span style="color: #0079C1">Pal</span></span></a>
+                
+                 
+                </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        </div>
+        <div class="col-md-1 column ui-sortable">
+          
+        </div>
+      </div>
+
+      <hr width="90%">
+      <div class="row mb-5 mt-5">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column btnprstruja ui-sortable">
+          <a href="{{url_for('StanariPlaceniRacuniStruja')}}"><button type="button" class="btn dugmeStruja btn-light">Pregled plaćenih računa za struju&nbsp;&nbsp;<i class="fas fa-clipboard-list"></i></button></a>
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+  </div>
+
+  <script>
+   $(document).ready(function() {
+        $("select.racun").change(function(){
+        var racun1 = $(this).children("option:selected").val();
+        
+        if(racun1==1){
+          window.location.href="http://localhost:5000/stanari_racuni_struja"
+        }
+        else if(racun1==2){
+          window.location.href="http://localhost:5000/stanari_racuni_voda"
+        }
+        else if(racun1==3){
+          window.location.href="http://localhost:5000/stanari_racuni_cistac"
+        }
+        else if(racun1==4){
+          window.location.href="http://localhost:5000/stanari_racuni_fond"
+        }
+
+    });
+   });
+
+  </script>
+    
+
+  
+{% endblock %}

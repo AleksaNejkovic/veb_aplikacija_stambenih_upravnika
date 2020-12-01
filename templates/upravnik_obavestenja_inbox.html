@@ -1,0 +1,144 @@
+{% extends 'base_upravnik.html' %}
+
+{% block title %}Upravnik zgrade{% endblock %}
+
+{% block content%}
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="static/img/upravnik_logo.svg">UPRAVNIK</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link" href="{{url_for('UpravnikPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikStanari',broj_stana='-')}}">Stanari</a>
+            </li>
+             <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('UpravnikObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link" href="{{url_for('OdjaviUpravnika')}}">Odjavi me</a>
+            </li>
+          </ul>
+      </div>
+  </nav>
+
+  <div class="container stranacela">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column svgslika ui-sortable">
+          <img src="/static/img/inbox.svg">
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+      <div class="row mb-4 mt-5 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column ui-sortable">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 175px;">Izaberite opciju:</label>
+            </div>
+            <select class="custom-select message" id="inputGroupSelect01">
+              <option disabled value="0" style="display: none;">Izaberite opciju</option>
+              <option value="1">Kreiraj novo obaveštenje</option>
+              <option value="2" selected>Pregled primljenih obaveštenja</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <div class="row justify-content-center my-4">
+          <center><h3>Primljena obaveštenja</h3></center>
+            <table class="table table-white table-responsive-sm">
+                <thead style="background-color: #17335e!important;color: white;">
+                <tr>
+                    <th scope="col">Pošiljalac</th>
+                    <th scope="col">Broj pošiljaoca</th>
+                    <th scope="col">Sadržaj</th>
+                    <th scope="col">Datum</th>
+                    <th scope="col">Vreme</th>
+                    <th scope="col" style="text-align: center;">Akcija</th>
+                </tr>
+                </thead>
+                {% for obavestenja in obavestenja %}
+                <tbody style="background-color: whitesmoke !important;color: #17335e;">
+                
+                <tr>
+                    
+                    
+                    <td>{{obavestenja.posiljalac}}</td>
+                    <td>{{obavestenja.broj_posiljaoca}}</td>
+                    <td style="white-space: nowrap;overflow: hidden;max-width:250px;">{{obavestenja.sadrzaj}}</td>
+                    <td>{{obavestenja.datum}}</td>
+                    <td>{{obavestenja.vreme}}</td>
+                    <td style="text-align: center;"><a data-toggle="modal" data-target="#exampleModal{{obavestenja.id_obavestenja}}"><i class="fas fa-eye action"></i></a>&nbsp;&nbsp;&nbsp;<a href="{{url_for('UpravnikObavestenjaBrisanje',id_obavestenja=obavestenja.id_obavestenja)}}" ><i class="fas fa-trash-alt action"></i></a></td>
+                    
+                </tr>
+                
+                </tbody>
+                <div class="modal fade" id="exampleModal{{obavestenja.id_obavestenja}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Sadržaj obaveštenja</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <textarea class="form-control" name="sadrzaj" id="exampleFormControlTextarea1" rows="8" style="font-style: italic;color: #6c63ff; padding: 2%;">{{obavestenja.sadrzaj}}</textarea>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+            </table>
+
+        </div>
+        
+
+     
+  </div>
+
+
+  <script>
+   $(document).ready(function() {
+        $("select.message").change(function(){
+        var message1 = $(this).children("option:selected").val();
+        // alert("You have selected the country - " + racun1);
+        if(message1==1){
+          window.location.href="http://localhost:5000/upravnik_obavestenja_nova"
+        }
+        else if(message1==2){
+          window.location.href="http://localhost:5000/upravnik_obavestenja_inbox"
+        }
+      });
+    });
+
+  </script>
+    
+
+  
+{% endblock %}

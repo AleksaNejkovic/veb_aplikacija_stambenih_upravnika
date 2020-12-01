@@ -1,0 +1,146 @@
+{% extends 'base_stanari.html' %}
+
+{% block title %}Stanari zgrade{% endblock %}
+
+{% block content%}
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="/static/img/stanari_logo.svg">STANARI</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link" href="{{url_for('StanariPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('StanariRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('StanariObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link menesamo" href="{{url_for('OdjaviStanara')}}">Odjavi me</a>
+            </li>
+          </ul>
+    </div>
+  </nav>
+  <div class="container stranacela">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column svgslika ui-sortable">
+          <img src="/static/img/power.svg">
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+
+      <form method="POST" id="UpisiForma" action="{{url_for('UplatnicaFond')}}">
+        <div class="row mb-4 mt-5">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 175px;">Broj računa:</span>
+              </div>
+              <input type="number" value="{{racuni_fond_plati.broj_racuna}}" name="broj_racuna" class="form-control" style="text-align: left;background-color: white" required readonly>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 175px;">Za mesec:</span>
+              </div>
+                 <input type="text" value="{{racuni_fond_plati.mesec_vazenja}}" name="mesec_vazenja" class="form-control" style="text-align: left;background-color: white" required readonly>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+       
+        <div class="row mb-4">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 175px;">Vaš iznos:</span>
+              </div>
+              <input type="number" name="iznos_rsd" id="iznosRSD" value="{{racuni_fond_plati.iznos}}" class="form-control" style="text-align: left;background-color: white" required readonly>
+              <div class="input-group-append">
+                <span class="input-group-text" style="display:inline-block; margin:0 auto;width: 70px">RSD</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+        
+        <div class="row mb-5">
+          <div class="col-md-4 column ui-sortable">
+            
+          </div>
+          <div class="col-md-4 column pozicijadugmetapotvrde ui-sortable">
+            <div id="paypal-button-container"></div>
+          </div>
+          <div class="col-md-4 column ui-sortable">
+             
+          </div>
+        </div>
+      </form> 
+       <hr width="90%">   
+    </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=AVnvVCAIe8ZTBUGsXt4neEcGveeeBixe-QNI5B3IKe345hILRGX5rWdVjePPU3zNFq2uQ_bjrhT4wE9U&currency=USD&disable-funding=card"></script>
+    <script>
+        var total=document.getElementById('iznosRSD');
+        var newtotal=total.value;
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: newtotal
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    document.getElementById("UpisiForma").submit();
+                    
+                    alert(details.payer.name.given_name +' uspešno ste platili račun za stambeni fond!');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'base_stanari.html' %}
+
+{% block title %}Stanari zgrade{% endblock %}
+
+{% block content%}
+
+
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="static/img/stanari_logo.svg">STANARI</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link" href="{{url_for('StanariPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('StanariRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('StanariObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link menesamo" href="{{url_for('OdjaviStanara')}}">Odjavi me</a>
+            </li>
+          </ul>
+    </div>
+  </nav>
+
+  <div class="container stranacela">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column svgslika ui-sortable">
+          <img src="/static/img/power.svg">
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+
+      <div class="row mb-5">
+        <div class="col-md-1 column ui-sortable">
+          
+        </div>
+        <div class="col-md-10 column pozicijadugmetapotvrde ui-sortable">
+          <center><h3 class="mt-4 mb-3">Plaćeni računi za čišćenje</h3></center>
+          <table class="table table-dark table-responsive-sm">
+            <thead style="background-color: #17335e!important;color: white;">
+            <tr>
+                <th scope="col">Datum</th>
+                <th scope="col">Vreme</th>
+                <th scope="col">Broj računa</th>
+                <th scope="col">Iznos</th>
+                <th scope="col">Mesec važenja</th>
+                <th scope="col">Broj stana</th>
+                <th scope="col">Korisničko ime platioca</th>
+            </tr>
+            </thead>
+            {% for placeni_racuni in placeni_racuni %}
+            <tbody style="background-color: whitesmoke !important;color: #17335e;">
+            <tr>
+                <td>{{placeni_racuni.datum}}</td>
+                <td>{{placeni_racuni.vreme}}</td>
+                <td>{{placeni_racuni.broj_racuna}}</td>
+                <td>{{placeni_racuni.iznos}}</td>
+                <td>{{placeni_racuni.mesec_vazenja}}</td>
+                <td>{{placeni_racuni.broj_stana}}</td>
+                <td>{{placeni_racuni.korisnicko_ime}}</td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        </div>
+        <div class="col-md-1 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+      <div class="row mb-5 mt-5">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column btnprstruja ui-sortable">
+          <a href="{{url_for('StanariRacuniCistac')}}"><button type="submit" class="btn dugmeStruja btn-light">Računi za čišćenje&nbsp;&nbsp;<i class="fas fa-undo"></i></button></a>
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+  </div>
+    
+
+  
+{% endblock %}

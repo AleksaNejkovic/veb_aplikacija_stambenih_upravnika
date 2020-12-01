@@ -1,0 +1,307 @@
+{% extends 'base_upravnik.html' %}
+
+{% block title %}Upravnik zgrade{% endblock %}
+
+{% block content%}
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-brand logo"><img src="/static/img/upravnik_logo.svg">UPRAVNIK</div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link" href="{{url_for('UpravnikPocetna')}}">Početna</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('UpravnikRacuni')}}">Računi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikStanari',broj_stana='-')}}">Stanari</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{{url_for('UpravnikObavestenja')}}">Obaveštenja</a>
+            </li>
+            <li class="nav-item odjava">
+              <a class="nav-link" href="{{url_for('OdjaviUpravnika')}}">Odjavi me</a>
+            </li>
+          </ul>
+      </div>
+  </nav>
+
+  <div class="container stranacela">
+      <div class="row mb-4 ur_okvir">
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+        <div class="col-md-8 column svgslika ui-sortable">
+          <img src="/static/img/power.svg">
+        </div>
+        <div class="col-md-2 column ui-sortable">
+          
+        </div>
+      </div>
+      <hr width="90%">
+
+      <form method="POST">
+        <div class="row mb-4">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 175px;">Broj računa:</span>
+              </div>
+              <input type="number" value="{{cistac_racun.broj_racuna}}" name="broj_racuna" class="form-control" style="text-align: left;" required>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 175px;">Za mesec:</span>
+              </div>
+              {%if mesec == "januar" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar" selected>Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "februar" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar" selected>Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "mart" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart" selected>Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "april" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april" selected>April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "maj" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj" selected>Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "jun" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun" selected>Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "jul" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul" selected>Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "avgust" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust" selected>Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "septembar" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar" selected>Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "oktobar" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar" selected>Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "novembar" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar" selected>Novembar</option>
+                  <option value="decembar">Decembar</option>
+                </select>
+              {%endif%}
+              {%if mesec == "decembar" %}
+                <select class="custom-select racun" name="mesec_vazenja" id="inputGroupSelect01" required>
+                  <option value="januar">Januar</option>
+                  <option value="februar">Februar</option>
+                  <option value="mart">Mart</option>
+                  <option value="april">April</option>
+                  <option value="maj">Maj</option>
+                  <option value="jun">Jun</option>
+                  <option value="jul">Jul</option>
+                  <option value="avgust">Avgust</option>
+                  <option value="septembar">Septembar</option>
+                  <option value="oktobar">Oktobar</option>
+                  <option value="novembar">Novembar</option>
+                  <option value="decembar" selected>Decembar</option>
+                </select>
+              {%endif%}
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+       
+        <div class="row mb-4">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column ui-sortable">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="width: 175px;">Unesite iznos:</span>
+              </div>
+              <input type="number" name="iznos_rsd" value="{{cistac_racun.iznos}}" class="form-control" style="text-align: left;" required>
+              <div class="input-group-append">
+                <span class="input-group-text" style="display:inline-block; margin:0 auto;width: 70px">RSD</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+        
+        <div class="row mb-5">
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+          <div class="col-md-8 column pozicijadugmetapotvrde ui-sortable">
+            <button type="submit" formaction="{{url_for('UpravnikRacuniCistacIzmena',broj_racuna=cistac_racun.broj_racuna)}}" class="btn dugmepotvrdi btn-light">Potvrdi izmene&nbsp;&nbsp;<i class="fas fa-check"></i></button>
+          </div>
+          <div class="col-md-2 column ui-sortable">
+            
+          </div>
+        </div>
+      </form>    
+    </div>
+
+{% endblock %}
